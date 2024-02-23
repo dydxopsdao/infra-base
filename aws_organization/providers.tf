@@ -1,10 +1,10 @@
 terraform {
-  cloud {
-    organization = "dydxopsdao"
-    workspaces {
-      name = "aws-organization"
-    }
-  }
+  # cloud {
+  #   organization = "dydxopsdao"
+  #   workspaces {
+  #     name = "aws-organization"
+  #   }
+  # }
 
   required_providers {
     aws = {
@@ -17,7 +17,7 @@ terraform {
 # Organization-level provider, used to manage member accounts
 # Use an explicit alias to prevent passing this to member account modules (the default behavior)
 provider "aws" {
-  alias                    = "org_level"
-  region                   = "ap-northeast-1"
-  shared_credentials_files = ["./.aws-credentials"]
+  alias   = "org_level"
+  region  = "ap-northeast-1"
+  profile = "dydxopsdao"
 }

@@ -12,9 +12,9 @@ resource "aws_organizations_account" "dos_amplitude_api_gateway" {
 
 # Account-level provider, used to manage resources in the member account
 provider "aws" {
-  alias                    = "dos_amplitude_api_gateway"
-  region                   = "ap-northeast-1"
-  shared_credentials_files = ["./.aws-credentials"]
+  alias   = "dos_amplitude_api_gateway"
+  region  = "ap-northeast-1"
+  profile = "dydxopsdao"
   assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.dos_amplitude_api_gateway.id}:role/OrganizationAccountAccessRole"
   }
