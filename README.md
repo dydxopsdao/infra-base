@@ -9,19 +9,25 @@ In each account there is usually the `terraformer` IAM user, meant as a starting
 Terraform configuration, defined in another repository. There may be more resources liker that but
 the idea is to keep it just as a bootstrap.
 
-Terraform Cloud is used to keep the state, however, for additional security, no user credentials 
-are stored in the Terraform Cloud workspace (as is the case for member account-level projects).
-Instead, each user is required to provide their own AWS credentials in a local file.
+The state is kept locally. TODO: Move to S3.
 
 ## Usage
 
-Create the `aws_organization/.aws-credentials` file with the following contents:
+Make sure you have the AWS CLI configured and the `aws` command is available.
+
+Edit the `~/.aws/credentials` and create an entry for the `dydxopsdao` profile:
 
 ```
-[default]
+...
+
+[dydxopsdao]
 aws_access_key_id = your-key-id
 aws_secret_access_key = your-secret
+
+...
 ```
+
+AWS providers in the configuration are set to use the `dydxopsdao` profile and this is how you will be authenticated.
 
 Then run:
 
