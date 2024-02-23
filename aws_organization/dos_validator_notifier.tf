@@ -16,7 +16,6 @@ resource "aws_organizations_account" "dos_validator_notifier" {
 provider "aws" {
   alias   = "dos_validator_notifier"
   region  = "ap-northeast-1"
-  profile = "dydxopsdao"
   assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.dos_validator_notifier.id}:role/OrganizationAccountAccessRole"
   }
