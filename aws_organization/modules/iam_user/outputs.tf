@@ -3,6 +3,6 @@ output "access_key_id" {
 }
 
 output "access_key_secret" {
-  value = aws_iam_access_key.this.secret
+  value     = aws_iam_access_key.this.secret
   sensitive = true
 }

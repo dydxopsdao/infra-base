@@ -12,15 +12,16 @@ resource "aws_organizations_account" "dos_amplitude_api_gateway" {
 
 # Account-level provider, used to manage resources in the member account
 provider "aws" {
-  alias  = "dos_amplitude_api_gateway"
-  region = "ap-northeast-1"
+  alias                    = "dos_amplitude_api_gateway"
+  region                   = "ap-northeast-1"
+  shared_credentials_files = ["./.aws-credentials"]
   assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.dos_amplitude_api_gateway.id}:role/OrganizationAccountAccessRole"
   }
 }
 
 module "dos_amplitude_api_gateway_terraformer" {
-  source = "../modules/iam_user"
+  source = "./modules/iam_user"
   providers = {
     aws = aws.dos_amplitude_api_gateway
   }

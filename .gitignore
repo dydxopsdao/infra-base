@@ -1,3 +1,6 @@
+# AWS credentials file for CLI-based Terraform Cloud runs
+.aws-credentials
+
 # Local .terraform directories
 **/.terraform/*
 
