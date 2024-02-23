@@ -5,5 +5,6 @@ Infrastructure base for the organization.
 
 The `terraform/aws-accounts` directory describes metadata about the organization's member accounts.
 
-In each account there is an IAM user named `terraformer`, meant as a starting point for another
-Terraform configuration, defined in another repository.
+In each account there is usually the `terraformer` IAM user, meant as a starting point for another
+Terraform configuration, defined in another repository. There may be more resources liker that but
+the idea is to keep it just as a bootstrap.
