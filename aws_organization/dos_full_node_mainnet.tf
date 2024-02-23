@@ -14,7 +14,6 @@ resource "aws_organizations_account" "dos_full_node_mainnet" {
 provider "aws" {
   alias   = "dos_full_node_mainnet"
   region  = "ap-northeast-1"
-  profile = "dydxopsdao"
   assume_role {
     role_arn = "arn:aws:iam::637423447856:role/OrganizationAccountAccessRole"
   }

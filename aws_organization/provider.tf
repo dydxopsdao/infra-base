@@ -1,10 +1,9 @@
 terraform {
-  # cloud {
-  #   organization = "dydxopsdao"
-  #   workspaces {
-  #     name = "aws-organization"
-  #   }
-  # }
+  backend "s3" {
+    bucket = "dydxopsdao-base-terraform"
+    key    = "terraform/aws_organization/tfstate"
+    region = "ap-northeast-1"
+  }
 
   required_providers {
     aws = {
@@ -19,5 +18,4 @@ terraform {
 provider "aws" {
   alias   = "org_level"
   region  = "ap-northeast-1"
-  profile = "dydxopsdao"
 }
