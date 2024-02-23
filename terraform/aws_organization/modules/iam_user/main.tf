@@ -2,7 +2,7 @@ resource "aws_iam_user" "this" {
   name = var.name
 }
 
-data "aws_iam_policy_document" "this" {
+data "aws_iam_policy_document" "policy" {
   statement {
     effect    = "Allow"
     actions   = var.permissions
@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "this" {
 resource "aws_iam_user_policy" "policy" {
   name   = "${var.name}-permissions"
   user   = aws_iam_user.this.name
-  policy = data.aws_iam_policy_document.this.json
+  policy = data.aws_iam_policy_document.policy.json
 }
 
 resource "aws_iam_access_key" "this" {
