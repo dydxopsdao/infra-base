@@ -25,7 +25,7 @@ module "dos_validator_snapshots_terraformer" {
     aws = aws.dos_validator_snapshots
   }
   name        = "terraformer"
-  permissions = ["s3:*"]
+  permissions = ["s3:*", "iam:*"]
 }
 
 output "dos_validator_snapshots_organization_id" {
