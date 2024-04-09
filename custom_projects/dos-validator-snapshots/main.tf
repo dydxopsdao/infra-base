@@ -19,7 +19,8 @@ data "aws_iam_policy_document" "bucket_permissions" {
     principals {
       type = "AWS"
       identifiers = [
-        "075421299018" # dydxopsdao organization account
+        "075421299018", # dydxopsdao organization account
+	"637423473456" # Jerome from KingNodes
       ]
     }
 
