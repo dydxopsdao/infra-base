@@ -1,53 +1,19 @@
 # infra-base
 Infrastructure base for the organization.
 
-## Overview
+## AWS organization configuration
 
-The `aws_organization` directory describes metadata about the organization's member accounts.
+Top-level configuration of the AWS environment.
 
-In each account there is usually the `terraformer` IAM user, meant as a starting point for another
-Terraform configuration, defined in another repository. There may be more resources like that but
-the idea is to keep it simple and as a bootstrap only.
+See the [README](aws_organization/README.md).
 
-The Terraform state is kept in S3.
+## Custom projects
 
-## Usage
+Random infrastructure projects maintained originally by DOS, not forked from `dydxprotocol` organization's repository
+(as is the case e.g. with `v4-infrastructure`).
 
-Make sure you have the AWS CLI configured and the `aws` command is available.
+### DOS validator snapshots
 
-### Authentication methods
+S3 environment for node snapshots.
 
-**Method 1**:
-
-Create a profile in `~/.aws/credentials`, e.g.:
-
-```
-[dydxopsdao]
-aws_access_key_id = your-key-id
-aws_secret_access_key = your-secret
-```
-
-Then point to it with an env var:
-
-```
-export AWS_PROFILE=dydxopsdao
-```
-
-**Method 2**:
-
-Place the key credentials in env vars:
-
-```
- export AWS_ACCESS_KEY_ID=your-key-id
- export AWS_SECRET_ACCESS_KEY=your-secret
-```
-
-**Ready!**
-
-Run locally:
-
-```
-cd aws_organization
-terraform init
-terraform plan
-```
+See the [README](custom_projects/dos_validator_snapshots/README.md).

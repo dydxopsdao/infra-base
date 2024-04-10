@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "bucket_permissions" {
       type = "AWS"
       identifiers = [
         "075421299018", # dydxopsdao organization account
-	"637423473456" # Jerome from KingNodes
+        "637423473456", # Jerome from KingNodes
       ]
     }
 
@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "bucket_permissions" {
   # Read access for the world
   statement {
     principals {
-      type = "*"
+      type        = "*"
       identifiers = ["*"]
     }
 

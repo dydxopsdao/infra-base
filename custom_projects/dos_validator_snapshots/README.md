@@ -1,4 +1,4 @@
-# dos-validator-snapshots
+# dos_validator_snapshots
 
 ## Deployment
 
