@@ -14,13 +14,31 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
 
 data "aws_iam_policy_document" "bucket_permissions" {
 
-  # Write access only for selected accounts
+  # Complete access for the dydxopsdao organization
   statement {
     principals {
       type = "AWS"
       identifiers = [
         "075421299018", # dydxopsdao organization account
-        "637423473456", # Jerome from KingNodes
+      ]
+    }
+
+    actions = [
+      "s3:*",
+    ]
+
+    resources = [
+      aws_s3_bucket.public_snapshots.arn,
+      "${aws_s3_bucket.public_snapshots.arn}/*",
+    ]
+  }
+
+  # Write but not delete for selected external accounts
+  statement {
+    principals {
+      type = "AWS"
+      identifiers = [
+        "637423473456", # KingNodes (point of contact: Jerome)
       ]
     }
 
@@ -28,7 +46,7 @@ data "aws_iam_policy_document" "bucket_permissions" {
       "s3:GetObject",
       "s3:ListBucket",
       "s3:PutObject",
-      "s3:DeleteObject",
+      "s3:GetBucketOwnershipControls",
     ]
 
     resources = [
