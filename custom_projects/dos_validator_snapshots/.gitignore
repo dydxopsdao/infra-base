@@ -1,2 +1,0 @@
-# Ignored because the main flow happens in Terraform Cloud
-.terraform.lock.hcl
