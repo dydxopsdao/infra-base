@@ -1,11 +1,26 @@
 data "aws_iam_policy_document" "scp_policy_document" {
   statement {
     effect = "Deny"
-    actions = [
-      "ec2:*",
-      "s3:*",
-      "rds:*",
-      "lambda:*"
+    not_actions = [
+      "a4b:*",
+      "budgets:*",
+      "ce:*",
+      "chime:*",
+      "cloudfront:*",
+      "cur:*",
+      "globalaccelerator:*",
+      "health:*",
+      "iam:*",
+      "importexport:*",
+      "mobileanalytics:*",
+      "organizations:*",
+      "route53:*",
+      "route53domains:*",
+      "shield:*",
+      "support:*",
+      "trustedadvisor:*",
+      "waf:*",
+      "wellarchitected:*"
     ]
     resources = ["*"]
     condition {

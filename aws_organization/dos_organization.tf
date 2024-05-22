@@ -11,11 +11,11 @@ module "scp_policy" {
   policy_name        = "RestrictRegionsPolicy"
   policy_description = "Restrict AWS services to approved regions only"
   approved_regions   = [
-    "ap-southeast-1", 
+    "ap-southeast-1",
     "ap-northeast-1",
     "eu-central-1",
     "eu-west-1"
     // Add your approved regions here
-    ]    
+  ]    
   target_ou_id        = "r-9w63"  // root OU ID
 }
