@@ -28,8 +28,9 @@ module "dos_test_terraformer" {
   }
   name        = "terraformer"
   permissions = [
-    "ec2:*"
-  ]
+    "ec2:*",
+    "organizations:*"
+    ]
 }
 
 output "dos_test_terraformer_outputs" {
