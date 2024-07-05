@@ -14,10 +14,18 @@ resource "aws_organizations_account" "dos_validator_snapshots" {
 
 # Account-level provider, used to manage resources in the member account
 provider "aws" {
-  alias   = "dos_validator_snapshots"
-  region  = "ap-northeast-1"
+  alias  = "dos_validator_snapshots"
+  region = "ap-northeast-1"
   assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.dos_validator_snapshots.id}:role/OrganizationAccountAccessRole"
+  }
+}
+
+# Define the IAM account password policy
+module "password_policy_dos_validator_snapshots" {
+  source = "./modules/password_policy"
+  providers = {
+    aws = aws.dos_validator_snapshots
   }
 }
 
@@ -31,7 +39,7 @@ module "dos_validator_snapshots_terraformer" {
 }
 
 output "dos_validator_snapshots_organization_id" {
-  value     = aws_organizations_account.dos_validator_snapshots.id
+  value = aws_organizations_account.dos_validator_snapshots.id
 }
 
 output "dos_validator_snapshots_terraformer_outputs" {

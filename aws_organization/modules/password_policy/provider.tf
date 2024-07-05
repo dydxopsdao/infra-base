@@ -1,3 +1,4 @@
+# A non-default, member account-specific provider is expected to be passed by the caller.
 terraform {
   required_providers {
     aws = {
