@@ -1,5 +1,6 @@
 terraform {
   # Specify required providers and their versions
+  # Organization-level provider, used to manage the organization is expected to be passed by the caller
   required_providers {
     aws = {
       source                = "hashicorp/aws"
