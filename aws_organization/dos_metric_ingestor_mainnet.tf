@@ -21,6 +21,14 @@ provider "aws" {
   }
 }
 
+# Define the IAM account password policy
+module "password_policy_dos_metric_ingestor_mainnet" {
+  source = "./modules/password_policy"
+  providers = {
+    aws = aws.dos_metric_ingestor_mainnet
+  }
+}
+
 module "dos_metric_ingestor_mainnet_terraformer" {
   source = "./modules/iam_user"
   providers = {
@@ -87,4 +95,32 @@ module "dos_metric_ingestor_mainnet_terraformer" {
 output "dos_metric_ingestor_mainnet_terraformer_outputs" {
   value     = module.dos_metric_ingestor_mainnet_terraformer
   sensitive = true
+}
+
+# IAM role to enable permission for ssm on EC2
+resource "aws_iam_role" "ssm_role" {
+  name = "EC2SSMRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
+  role       = aws_iam_role.ssm_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
+resource "aws_iam_instance_profile" "ssm_instance_profile" {
+  name = "EC2SSMInstanceProfile"
+  role = aws_iam_role.ssm_role.name
 }
