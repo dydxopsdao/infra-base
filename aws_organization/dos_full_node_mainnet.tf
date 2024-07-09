@@ -12,10 +12,18 @@ resource "aws_organizations_account" "dos_full_node_mainnet" {
 
 # Account-level provider, used to manage resources in the member account
 provider "aws" {
-  alias   = "dos_full_node_mainnet"
-  region  = "ap-northeast-1"
+  alias  = "dos_full_node_mainnet"
+  region = "ap-northeast-1"
   assume_role {
     role_arn = "arn:aws:iam::637423447856:role/OrganizationAccountAccessRole"
+  }
+}
+
+# Define the IAM account password policy
+module "password_policy_dos_full_node_mainnet" {
+  source = "./modules/password_policy"
+  providers = {
+    aws = aws.dos_full_node_mainnet
   }
 }
 

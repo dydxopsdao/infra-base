@@ -12,10 +12,18 @@ resource "aws_organizations_account" "dos_validator_notifier" {
 
 # Account-level provider, used to manage resources in the member account
 provider "aws" {
-  alias   = "dos_validator_notifier"
-  region  = "ap-northeast-1"
+  alias  = "dos_validator_notifier"
+  region = "ap-northeast-1"
   assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.dos_validator_notifier.id}:role/OrganizationAccountAccessRole"
+  }
+}
+
+# Define the IAM account password policy
+module "password_policy_dos_validator_notifier" {
+  source = "./modules/password_policy"
+  providers = {
+    aws = aws.dos_validator_notifier
   }
 }
 
