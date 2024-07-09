@@ -1,7 +1,7 @@
 resource "aws_organizations_account" "dos_metric_ingestor_testnet" {
   provider  = aws.org_level
   name      = "dos-metric-ingestor-testnet"
-  email     = "infrastructure+metric-ingestor-testnet@dydxopsservices.com"
+  email     = "infrastructure+metric-ingestor-testnet-2@dydxopsservices.com" # The "-2" suffix is due to an old account being deleted
   role_name = "OrganizationAccountAccessRole"
 
   # There is no AWS Organizations API for reading role_name
