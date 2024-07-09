@@ -18,4 +18,10 @@ variable "region_restriction_target_ids" {
   description = "Target IDs for the region restriction SCP"
 }
 
+variable "require_ebs_encryption_target_ids" {
+  type        = list(string)
+  description = "Target IDs for the deny unencrypted ebs volumes and prevent disable ebs encryption SCPs"
+}
+
+
 # Other variables related to AWS organization management can be added here

@@ -53,5 +53,6 @@ approved_regions = [
     "eu-west-1"
 ]
 region_restriction_target_ids = ["r-9w63"]
+require_ebs_encryption_target_ids = ["r-9w63"]
 
 # Other variables related to AWS organization management can be added here
