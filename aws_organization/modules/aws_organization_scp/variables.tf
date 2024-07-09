@@ -16,7 +16,7 @@ variable "policy_statements" {
     actions     = optional(list(string))
     not_actions = optional(list(string))
     resources   = list(string)
-    conditions  = optional(list(object({
+    conditions = optional(list(object({
       test     = string
       variable = string
       values   = list(string)

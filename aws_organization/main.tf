@@ -8,15 +8,15 @@ module "password_policy_dos_organization" {
 module "prevent_leave_org_scp" {
   source = "./modules/aws_organization_scp"
   providers = {
-      aws = aws.org_level
-    }
+    aws = aws.org_level
+  }
   policy_name        = "PreventLeaveOrganization"
   policy_description = "Prevents accounts from leaving the organization"
   policy_statements = [
     {
-      effect    = "Deny"
-      actions   = ["organizations:LeaveOrganization"]
-      resources = ["*"]
+      effect     = "Deny"
+      actions    = ["organizations:LeaveOrganization"]
+      resources  = ["*"]
       conditions = []
     }
   ]
@@ -26,8 +26,8 @@ module "prevent_leave_org_scp" {
 module "region_restriction_scp" {
   source = "./modules/aws_organization_scp"
   providers = {
-      aws = aws.org_level
-    }
+    aws = aws.org_level
+  }
   policy_name        = "RegionRestriction"
   policy_description = "Restricts usage to approved regions"
   policy_statements = [
