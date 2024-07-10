@@ -1,4 +1,4 @@
-# AWS account ID: 071804164849
+# AWS account ID: 730335422260
 
 resource "aws_organizations_account" "dos_metric_ingestor_testnet" {
   provider  = aws.org_level
@@ -82,6 +82,10 @@ module "dos_metric_ingestor_testnet_terraformer" {
     "servicediscovery:UpdateService",
     "sns:ListTopics",
   ]
+}
+
+output "dos_metric_ingestor_testnet_aws_account_id" {
+  value     = aws_organizations_account.dos_metric_ingestor_testnet.id
 }
 
 output "dos_metric_ingestor_testnet_terraformer_outputs" {
