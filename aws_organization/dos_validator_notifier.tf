@@ -114,13 +114,15 @@ output "dos_validator_notifier_terraformer_outputs" {
   sensitive = true
 }
 
-module "tfc_oidc_member" {
+# Integrate Terraform Cloud with AWS using OpenID Connect (OIDC)
+module "tfc_oidc_dos_validator_notifier" {
   source = "./modules/tfc_oidc"
   providers = {
     aws = aws.dos_validator_notifier
   }
 
   tfc_workspace_name    = "signotifier"
+  tfc_policy_name       = "tfc_signotifier_policy"
   tfc_role_permissions = [
     # KMS full access
     "kms:*",
@@ -196,6 +198,6 @@ module "tfc_oidc_member" {
   ]
 }
 
-output "module_outputs" {
-  value     = module.tfc_oidc_member
+output "module_outputs_dos_validator_notifier" {
+  value     = module.tfc_oidc_dos_validator_notifier
 }
