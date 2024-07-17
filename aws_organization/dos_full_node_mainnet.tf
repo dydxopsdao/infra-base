@@ -42,3 +42,4 @@ output "dos_full_node_mainnet_terraformer_outputs" {
   value     = module.dos_full_node_mainnet_terraformer
   sensitive = true
 }
+
