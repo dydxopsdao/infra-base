@@ -44,3 +44,20 @@ output "dos_validator_snapshots_terraformer_outputs" {
   value     = module.dos_validator_snapshots_terraformer
   sensitive = true
 }
+
+# Integrate Terraform Cloud workspace with AWS using OpenID Connect (OIDC)
+module "tfc_oidc_dos_validator_snapshots" {
+  source = "./modules/tfc_oidc"
+  providers = {
+    aws = aws.dos_validator_snapshots
+  }
+
+  tfc_workspace_name    = "dos-validator-snapshots"
+  tfc_policy_name       = "tfc_validator_snapshots_policy"
+  tfc_role_permissions  = ["s3:*", "iam:*"]
+  # Apply least-privilege principle when declaring role permissions
+}
+
+output "module_outputs_dos_validator_snapshots" {
+  value     = module.tfc_oidc_dos_validator_snapshots
+}

@@ -40,3 +40,19 @@ output "dos_amplitude_api_gateway_terraformer_outputs" {
   value     = module.dos_amplitude_api_gateway_terraformer
   sensitive = true
 }
+
+# Integrate Terraform Cloud workspace with AWS using OpenID Connect (OIDC)
+module "tfc_oidc_dos_amplitude_api_gateway" {
+  source = "./modules/tfc_oidc"
+  providers = {
+    aws = aws.dos_amplitude_api_gateway
+  }
+
+  tfc_workspace_name    = "amplitude-api-gateway"
+  tfc_policy_name       = "tfc_amplitude_api_gateway_policy"
+  tfc_role_permissions  = ["apigateway:*"] 
+}
+
+output "module_outputs_dos_amplitude_api_gateway" {
+  value     = module.tfc_oidc_dos_amplitude_api_gateway
+}
