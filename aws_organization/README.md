@@ -4,41 +4,31 @@
 
 The `aws_organization` directory describes metadata about the organization's member accounts.
 
-In each account there is usually the `terraformer` IAM user, meant as a starting point for another
-Terraform configuration, defined in another repository. There may be more resources like that but
-the idea is to keep it simple and as a bootstrap only.
+In each member account, there is an Open ID Connect (OIDC) configuration to integrate Terraform Cloud (TFC) workspace with AWS. Resources in the member accounts are provisioned by TFC using OIDC provider. Terraform state of those resources is managed by TFC.
 
-The Terraform state is kept in S3.
+The Terraform state of the `aws_organization` is kept in S3.
 
 ## Usage
 
-Make sure you have the AWS CLI configured and the `aws` command is available.
+Make sure you have the AWS and Terraform CLI configured and the `aws` and `terraform` commands are available. 
 
-### Authentication methods
+### Authentication method
 
-**Method 1**:
+**AWS IAM Identity Center credentials (Recommended)**:
 
-Create a profile in `~/.aws/credentials`, e.g.:
+1\. Configure the AWS CLI to use AWS IAM Identity Center authentication
 
-```
-[dydxopsdao]
-aws_access_key_id = your-key-id
-aws_secret_access_key = your-secret
-```
-
-Then point to it with an env var:
+In your terminal, step through the sso configuration wizard.
+If you get stuck, refer to [aws docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#cli-configure-sso-configure)
 
 ```
-export AWS_PROFILE=dydxopsdao
+aws configure sso
 ```
 
-**Method 2**:
-
-Place the key credentials in env vars:
-
+2\. Set the below env variable in your terminal to be used as default a profile.
+You can override this setting by using the --profile parameter.
 ```
- export AWS_ACCESS_KEY_ID=your-key-id
- export AWS_SECRET_ACCESS_KEY=your-secret
+export AWS_PROFILE=your-organization
 ```
 
 **Ready!**
@@ -47,6 +37,7 @@ Run locally:
 
 ```
 cd aws_organization
+aws sso login
 terraform init
 terraform plan
 ```
