@@ -15,7 +15,7 @@ provider "aws" {
   alias  = "dos_full_node_mainnet"
   region = "ap-northeast-1"
   assume_role {
-    role_arn = "arn:aws:iam::637423447856:role/OrganizationAccountAccessRole"
+    role_arn = "arn:aws:iam::${aws_organizations_account.dos_full_node_mainnet.id}:role/OrganizationAccountAccessRole"
   }
 }
 
@@ -26,18 +26,3 @@ module "password_policy_dos_full_node_mainnet" {
     aws = aws.dos_full_node_mainnet
   }
 }
-
-module "dos_full_node_mainnet_terraformer" {
-  source = "./modules/iam_user"
-  providers = {
-    aws = aws.dos_full_node_mainnet
-  }
-  name        = "terraformer"
-  permissions = ["ec2:*"]
-}
-
-output "dos_full_node_mainnet_terraformer_outputs" {
-  value     = module.dos_full_node_mainnet_terraformer
-  sensitive = true
-}
-
