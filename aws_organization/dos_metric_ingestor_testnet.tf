@@ -82,6 +82,10 @@ module "dos_metric_ingestor_testnet_terraformer" {
   ]
 }
 
+output "dos_metric_ingestor_testnet_aws_account_id" {
+  value     = aws_organizations_account.dos_metric_ingestor_testnet.id
+}
+
 output "dos_metric_ingestor_testnet_terraformer_outputs" {
   value     = module.dos_metric_ingestor_testnet_terraformer
   sensitive = true
