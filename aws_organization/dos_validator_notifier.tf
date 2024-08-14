@@ -114,3 +114,43 @@ module "tfc_oidc_dos_validator_notifier" {
 output "module_outputs_dos_validator_notifier" {
   value     = module.tfc_oidc_dos_validator_notifier
 }
+
+# Grant an external AWS Account permission to access the Lambda function by assuming a role.
+
+# Define an IAM role that the external AWS account will assume
+resource "aws_iam_role" "lambda_invoke_role" {
+  provider = aws.dos_validator_notifier
+  name = "ExternalSignotifierInvoker"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+}
+
+# Define the policy document for assuming the role
+data "aws_iam_policy_document" "assume_role_policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["sts:AssumeRole"]
+    principals {
+      type        = "AWS"
+      identifiers = ["332066407361"]
+    }
+  }
+}
+
+# Define the policy document that allows invoking the Lambda function URL
+data "aws_iam_policy_document" "lambda_invoke_policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["lambda:InvokeFunctionUrl"]
+    resources = ["arn:aws:lambda:ap-northeast-1:791066989954:function:signotifier"]
+  }
+}
+
+# Attach a policy to the role that allows invoking the Lambda function URL
+resource "aws_iam_role_policy" "lambda_invoke_policy" {
+  provider = aws.dos_validator_notifier
+  name   = "signotifier_invoke_policy"
+  role   = aws_iam_role.lambda_invoke_role.id
+
+  policy = data.aws_iam_policy_document.lambda_invoke_policy.json
+}
